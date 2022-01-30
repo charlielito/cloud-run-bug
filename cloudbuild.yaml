@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker pull ${_IMAGE} || exit 0']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+            'build',
+            '-t', '${_IMAGE}',
+            '--cache-from', '${_IMAGE}',
+            '.'
+        ]
+images: ['${_IMAGE}']
